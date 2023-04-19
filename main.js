@@ -10,3 +10,65 @@ function isPrime(num) {
     if (num % i == 0 || num % (i + 2) == 0) return false;
   return true;
 }
+
+class BaseNumber {
+  _number;
+  get number(){
+    return this._number;
+  }
+  set number (nbr){
+    this._number = nbr;
+  }
+  getNumber(){
+    return this._number;
+  }
+}
+
+class NumberBucket extends BaseNumber{
+  constructor(number=0){
+    super();
+    this._number = number;
+  }
+}
+
+class PrimeBucket extends BaseNumber{
+  constructor(){
+    super();
+    this._number = 0;
+  }
+  set number(nbr){
+    isPrime(nbr)? this._number = nbr: nothing;
+  }
+}
+let numbers = [];
+for (let i = 0; i < dataArr.length; i++) {
+  if(isPrime(dataArr[i])){
+    let obj = new PrimeBucket();
+    obj.number = dataArr[i];
+    numbers.push(obj);
+  } else {
+    let obj = new NumberBucket();
+    obj.number = dataArr[i];
+    numbers.push(obj);
+  }
+}
+
+console.log(numbers);
+
+// print all numbers
+
+console.log("get all numbers:")
+// for (let i = 0; i < numbers.length; i++) {
+//   console.log(numbers[i].getNumber())  
+// }
+numbers.map(a => console.log(a.getNumber()))
+
+// print prime numbers
+
+console.log("get only primes:")
+// for (let i = 0; i < numbers.length; i++) {
+//   if(numbers[i] instanceof PrimeBucket){
+//     console.log(numbers[i].getNumber());
+//   }  
+// }
+numbers.map(a => (a instanceof PrimeBucket)? console.log(a.getNumber()): "nothing")
